@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mx.org.inegi.yaab.acceso.beans.Empleado;
+
 /**
  *
  * @author SAULSZSZ
@@ -26,6 +28,9 @@ public class Validar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    EmpleadoDAO edao=new EmpleadoDAO();
+    Empleado em=new Empleado();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -69,7 +74,19 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accion=request.getParameter("accion");
+        if (accion.equalsIgnoreCase("Ingresar")){
+            String user=request.getParameter("txtuser");
+            String pass=request.getParameter("txtpass");
+            em=edao.validar(user, pass);
+            if (em.getIdUsuario()!=null){
+                request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
+            }else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        }else {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
     }
 
     /**

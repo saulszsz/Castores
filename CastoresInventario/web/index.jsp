@@ -15,10 +15,10 @@
     <body>
         <h1>Hello World!</h1>
         <div class="container mt-4 col-log-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <form>
-                        <div class="form-group">
+            <div class="card col-sm-10">
+                <div class="card-body">
+                    <form class="form-sign" action="Validar" method="POST">
+                        <div class="form-group text-center">
                             <h3>Login</h3>
                             <img src="img/gear.png" alt="70" width="170"/>
                             <label>Bienvenido!</label>
