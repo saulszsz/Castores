@@ -80,6 +80,7 @@ public class Validar extends HttpServlet {
             String pass = request.getParameter("txtpass");
             usr = udao.validar(user, pass);
             if (usr.getCorreo() != null) {
+                request.setAttribute("usuario", usr);
                 request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
