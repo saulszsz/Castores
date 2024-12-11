@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Registrar salida de producto</h1>
+        <h1>Registrar Entrada de producto</h1>
     </body>
 </html>

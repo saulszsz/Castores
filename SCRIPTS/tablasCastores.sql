@@ -33,4 +33,8 @@ CREATE TABLE usuarios (
   PRIMARY KEY(idUsuario)
 );
 
+INSERT INTO `rol` (`idRol`, `nombre`, `descripcion`) VALUES 
+('1', 'ADMINISTRADOR', 'Ver módulo inventario, Agregar nuevos productos, Aumentar inventario, Dar de baja/reactivar un producto, Ver módulo del histórico'), 
+('2', 'ALMACENISTA', 'Ver módulo inventario, Ver módulo para Salida de productos, Sacar inventario del almacén');
+
 COMMIT;
