@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author SAULSZSZ
@@ -80,7 +79,7 @@ public class Validar extends HttpServlet {
             String user = request.getParameter("txtuser");
             String pass = request.getParameter("txtpass");
             usr = udao.validar(user, pass);
-            if (usr != null) {
+            if (usr.getCorreo() != null) {
                 request.getRequestDispatcher("Controlador?accion=Principal").forward(request, response);
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
