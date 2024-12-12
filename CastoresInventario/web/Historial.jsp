@@ -4,15 +4,26 @@
     Author     : SAULSZSZ
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Historial</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
         <h1>Historial</h1>
+        <a class="btn btn-info" href="Controlador?menu=Historial&accion=Listar">
+            TODAS
+        </a>
+        <a class="btn btn-info" href="Controlador?menu=Historial&accion=ListarEntrada">
+            ENTRADAS
+        </a>
+        <a class="btn btn-info" href="Controlador?menu=Historial&accion=ListarSalida">
+            SALIDAS
+        </a>
         <div class="d-flex">
             <div class="card col-sm-8">
                 <table class="table table-hover" border="1">
@@ -27,34 +38,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="pro" items="${productos}">
-                        <c:if test="${usr.getIdRol() == 1 || pro.getEstatus().equals('ACTIVO')}">
-                            <tr>
-                                <td>${pro.getIdProducto()}</td>
-                                <td>${pro.getNombre()}</td>
-                                <td>${pro.getDescripcion()}</td>
-                                <td>${pro.getInventario()}</td>
-                                <td>${pro.getEstatus()}</td>
-                                <td>
-                            <c:if test="${usr.getIdRol() == 1}">
-                                <a class="btn btn-info" href="Controlador?menu=Inventario&accion=Aumenta&id=${pro.getIdProducto()}">
-                                    <img style="width: 30px" src="img/box_add.png" alt=""/>
-                                    Aumentar inventario
-                                </a>
-                            </c:if>
-                            <c:if test="${usr.getIdRol() == 2}">
-                                <a class="btn btn-info" href="Controlador?menu=Inventario&accion=Saca&id=${pro.getIdProducto()}">
-                                    <img style="width: 30px" src="img/package.png" alt=""/>
-                                    Sacar inventario
-                                </a>
-                            </c:if>
-                            </td>
-                            </tr>
-                        </c:if>
+                    <c:forEach var="his" items="${historicos}">
+                        <tr>
+                            <td>${his.getIdHistorico()}</td>
+                            <td>${his.getUsuario()}</td>
+                            <td>${his.getProducto()}</td>
+                            <td>${his.getMovimiento()}</td>
+                            <td>${his.getCantidad()}</td>
+                            <td>${his.getFecha()}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>

@@ -12,7 +12,9 @@ public class Historico {
 
     int idHistorico;
     int idUsuario;
+    String usuario;
     int idProducto;
+    String producto;
     String movimiento;
     int cantidad;
     String fecha;
@@ -75,6 +77,22 @@ public class Historico {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
 }

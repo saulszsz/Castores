@@ -49,48 +49,6 @@ public class ProductoDAO {
         return lista;
     }
 
-    public List listarAdm() {
-        String sql = "select * from productos";
-        List<Producto> lista = new ArrayList<>();
-        try {
-            con = cn.Conexion();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Producto p = new Producto();
-                p.setIdProducto(rs.getInt("idProducto"));
-                p.setNombre(rs.getString("nombre"));
-                p.setDescripcion(rs.getString("descripcion"));
-                p.setInventario(rs.getInt("inventario"));
-                p.setEstatus(rs.getString("estatus"));
-                lista.add(p);
-            }
-        } catch (Exception e) {
-        }
-        return lista;
-    }
-
-    public List listarAlm() {
-        String sql = "select * from productos where estatus = 'ACTIVO'";
-        List<Producto> lista = new ArrayList<>();
-        try {
-            con = cn.Conexion();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Producto p = new Producto();
-                p.setIdProducto(rs.getInt("idProducto"));
-                p.setNombre(rs.getString("nombre"));
-                p.setDescripcion(rs.getString("descripcion"));
-                p.setInventario(rs.getInt("inventario"));
-                p.setEstatus(rs.getString("estatus"));
-                lista.add(p);
-            }
-        } catch (Exception e) {
-        }
-        return lista;
-    }
-
     public int agregar(Producto pro) {
         String sql = "insert into productos(nombre,descripcion,estatus)values(?,?,?)";
         try {
@@ -138,7 +96,7 @@ public class ProductoDAO {
     }
 
     public int bajar(Producto pro) {
-        String sql = "update productos set estatus=0 where idProducto=?";
+        String sql = "update productos set estatus='BAJA' where idProducto=?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -150,7 +108,7 @@ public class ProductoDAO {
     }
 
     public int activar(Producto pro) {
-        String sql = "update productos set estatus=1 where idProducto=?";
+        String sql = "update productos set estatus='ACTIVO' where idProducto=?";
         try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);

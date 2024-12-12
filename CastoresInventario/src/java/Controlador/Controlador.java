@@ -43,6 +43,7 @@ public class Controlador extends HttpServlet {
     HistoricoDAO hisdao = new HistoricoDAO();
     int idPro;
     List lista;
+    List listaHis;
     int VisAgregar;
     int VisAumentar;
     int VisSacar;
@@ -101,7 +102,6 @@ public class Controlador extends HttpServlet {
                     pro.setNombre(nombreAu);
                     pro.setInventario(inventarioAu);
                     prodao.actualizarInventario(pro);
-
                     his.setIdUsuario(usr.getIdUsuario());
                     his.setIdProducto(pro.getIdProducto());
                     his.setMovimiento("ENTRADA");
@@ -113,11 +113,50 @@ public class Controlador extends HttpServlet {
                     hisdao.agregar(his);
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
+                case "Saca":
+                    VisAgregar = 0;
+                    VisAumentar = 0;
+                    VisSacar = 1;
+                    idPro = Integer.parseInt(request.getParameter("id"));
+                    Producto p2 = prodao.listarId(idPro);
+                    request.setAttribute("producto", p2);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
+                    break;
                 case "Sacar":
+                    VisSacar = 0;
+                    int idProductoAu2 = Integer.parseInt(request.getParameter("txtIdProductoAu"));
+                    String nombreAu2 = request.getParameter("txtNombreAu");
+                    int inventarioAu2 = Integer.parseInt(request.getParameter("txtInventarioAu")) - Integer.parseInt(request.getParameter("txtAumentar"));
+                    pro.setIdProducto(idProductoAu2);
+                    pro.setNombre(nombreAu2);
+                    pro.setInventario(inventarioAu2);
+                    prodao.actualizarInventario(pro);
+                    his.setIdUsuario(usr.getIdUsuario());
+                    his.setIdProducto(pro.getIdProducto());
+                    his.setMovimiento("SALIDA");
+                    his.setCantidad(Integer.parseInt(request.getParameter("txtAumentar")));
+                    Date todayDate2 = new Date();
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    String fechaActual2 = sdf2.format(todayDate2);
+                    his.setFecha(fechaActual2);
+                    hisdao.agregar(his);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Bajar":
+                    VisAgregar = 0;
+                    VisAumentar = 0;
+                    VisSacar = 0;
+                    pro.setEstatus("BAJA");
+                    prodao.bajar(pro);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Activar":
+                    VisAgregar = 0;
+                    VisAumentar = 0;
+                    VisSacar = 0;
+                    pro.setEstatus("ACTIVO");
+                    prodao.activar(pro);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 default:
                     throw new AssertionError();
@@ -125,18 +164,21 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Inventario.jsp").forward(request, response);
         }
         if (menu.equals("Historial")) {
-            request.getRequestDispatcher("Historial.jsp").forward(request, response);
-        }
-        if (menu.equals("SalidaProducto")) {
             switch (accion) {
-                case "ListarAlm":
-                    lista = prodao.listarAlm();
-                    request.setAttribute("productos", lista);
+                case "Listar":
+                    listaHis = hisdao.listar(0);
+                    break;
+                case "ListarEntrada":
+                    listaHis = hisdao.listar(1);
+                    break;
+                case "ListarSalida":
+                    listaHis = hisdao.listar(2);
                     break;
                 default:
                     throw new AssertionError();
             }
-            request.getRequestDispatcher("SalidaProducto.jsp").forward(request, response);
+            request.setAttribute("historicos", listaHis);
+            request.getRequestDispatcher("Historial.jsp").forward(request, response);
         }
     }
 

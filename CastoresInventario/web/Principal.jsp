@@ -25,7 +25,7 @@
                             <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Inventario&accion=Listar" target="myFrame">Inventario</a>
                         </li>
                         <li class="nav-item ${usuario.getIdRol() == 1 ? '' : 'd-none'}">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Historial" target="myFrame">Historial</a>
+                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Historial&accion=Listar" target="myFrame">Historial</a>
                         </li>
                     </ul>
                 </div>

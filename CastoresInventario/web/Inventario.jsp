@@ -32,6 +32,7 @@
                             <th>INVENTARIO</th>
                             <th>ESTATUS</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,12 +58,52 @@
                                             </a>
                                         </c:if>
                                     </td>
+                                    <c:if test="${usr.getIdRol() == 1}">
+                                        <td>
+                                            <c:if test="${pro.getEstatus().equals('ACTIVO')}">
+                                                <a class="btn btn-success" href="Controlador?menu=Inventario&accion=Bajar&id=${pro.getIdProducto()}">
+                                                    <img style="width: 30px" src="img/toggle_on.png" alt=""/>
+                                                </a>      
+                                            </c:if>
+                                            <c:if test="${pro.getEstatus().equals('BAJA')}">
+                                                <a class="btn btn-danger" href="Controlador?menu=Inventario&accion=Activar&id=${pro.getIdProducto()}">
+                                                    <img style="width: 30px" src="img/toggle_off.png" alt=""/>
+                                                </a>     
+                                            </c:if>
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </c:if>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
+
+            <c:if test="${VisAgregar == 1}">
+                <div class="card col-sm-4">
+                    <h4>Agregar producto</h4>
+                    <div class="card-body">
+                        <form action="Controlador?menu=Inventario" method="POST">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" name="txtNombre" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Descripcion</label>
+                                <input type="text" name="txtDescripcion" class="form-control">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-group-text" for="inputGroupSelect01">Estatus</label>
+                                <select class="form-select" name="selEstatus" aria-label="Default select example">
+                                    <option value="ACTIVO">Activo</option>
+                                    <option value="BAJA">Baja</option>
+                                </select>
+                            </div>
+                            <input type="submit" name="accion" value="Agregar" class="btn btn-info">
+                        </form>
+                    </div>
+                </div>
+            </c:if>
 
             <c:if test="${VisAumentar == 1}">
                 <div class="card col-sm-4">
@@ -93,33 +134,7 @@
                                 <label>Cantidad a aumentar</label>
                                 <input type="number" name="txtAumentar" class="form-control">
                             </div>
-                            <input type="submit" name="accion" value="Aumentar" class="btn btn-success">
-                        </form>
-                    </div>
-                </div>
-            </c:if>
-
-            <c:if test="${VisAgregar == 1}">
-                <div class="card col-sm-4">
-                    <h4>Agregar producto</h4>
-                    <div class="card-body">
-                        <form action="Controlador?menu=Inventario" method="POST">
-                            <div class="form-group">
-                                <label>Nombre</label>
-                                <input type="text" name="txtNombre" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Descripcion</label>
-                                <input type="text" name="txtDescripcion" class="form-control">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-group-text" for="inputGroupSelect01">Estatus</label>
-                                <select class="form-select" name="selEstatus" aria-label="Default select example">
-                                    <option value="ACTIVO">Activo</option>
-                                    <option value="BAJA">Baja</option>
-                                </select>
-                            </div>
-                            <input type="submit" name="accion" value="Agregar" class="btn btn-info">
+                            <input type="submit" name="accion" value="Aumentar" class="btn btn-info">
                         </form>
                     </div>
                 </div>
@@ -154,7 +169,7 @@
                                 <label>Cantidad a sacar</label>
                                 <input type="number" name="txtAumentar" class="form-control">
                             </div>
-                            <input type="submit" name="accion" value="Sacar" class="btn btn-success">
+                            <input type="submit" name="accion" value="Sacar" class="btn btn-info">
                         </form>
                     </div>
                 </div>
