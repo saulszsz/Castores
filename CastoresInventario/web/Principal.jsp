@@ -27,9 +27,6 @@
                         <li class="nav-item ${usuario.getIdRol() == 1 ? '' : 'd-none'}">
                             <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Historial" target="myFrame">Historial</a>
                         </li>
-                        <li class="nav-item ${usuario.getIdRol() == 2 ? '' : 'd-none'}">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=SalidaProducto&accion=Listar" target="myFrame">Salida de producto</a>
-                        </li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">

@@ -4,12 +4,16 @@
  */
 package Controlador;
 
+import Modelo.Historico;
+import Modelo.HistoricoDAO;
 import Modelo.Producto;
 import Modelo.ProductoDAO;
 import Modelo.Usuario;
 import Modelo.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,10 +35,12 @@ public class Controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    UsuarioDAO udao = new UsuarioDAO();
     Usuario usr = new Usuario();
+    UsuarioDAO udao = new UsuarioDAO();
     Producto pro = new Producto();
     ProductoDAO prodao = new ProductoDAO();
+    Historico his = new Historico();
+    HistoricoDAO hisdao = new HistoricoDAO();
     int idPro;
     List lista;
     int VisAgregar;
@@ -95,6 +101,16 @@ public class Controlador extends HttpServlet {
                     pro.setNombre(nombreAu);
                     pro.setInventario(inventarioAu);
                     prodao.actualizarInventario(pro);
+
+                    his.setIdUsuario(usr.getIdUsuario());
+                    his.setIdProducto(pro.getIdProducto());
+                    his.setMovimiento("ENTRADA");
+                    his.setCantidad(Integer.parseInt(request.getParameter("txtAumentar")));
+                    Date todayDate = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    String fechaActual = sdf.format(todayDate);
+                    his.setFecha(fechaActual);
+                    hisdao.agregar(his);
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Sacar":
