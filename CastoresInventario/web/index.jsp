@@ -20,7 +20,7 @@
                     <form class="form-sign" action="Validar" method="POST">
                         <div class="form-group text-center">
                             <h3>Login</h3>
-                            <img src="img/gear.png" alt="70" width="170"/>
+                            <img src="img/account_circle.png" alt="70" width="170"/>
                             <h6>!Bienvenido!</h6>
                         </div>
                         <div class="form-group">

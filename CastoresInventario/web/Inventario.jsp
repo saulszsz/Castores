@@ -46,30 +46,22 @@
                 </table>
             </div>
             <div class="card col-sm-4">
-                <h4>Registrar Entrada de producto</h4>
+                <h4>Agregar producto</h4>
                 <div class="card-body">
-                    <form>
+                    <form action="Controlador?menu=Inventario" method="POST">
                         <div class="form-group">
                             <label>Nombre</label>
                             <input type="text" name="txtNombre" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Descripcion</label>
-                            <input type="text" name="txtEstatus" class="form-control">
+                            <input type="text" name="txtDescripcion" class="form-control">
                         </div>
-                        <label>Estatus</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="ACTIVO" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                Activo
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="BAJA">
-                            <label class="form-check-label" for="exampleRadios2">
-                                Baja
-                            </label>
-                        </div>
+                        <select class="form-select" name="selEstatus" aria-label="Default select example">
+                            <option selected>Estatus</option>
+                            <option value="ACTIVO">Activo</option>
+                            <option value="BAJA">Baja</option>
+                        </select>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                     </form>
                 </div>

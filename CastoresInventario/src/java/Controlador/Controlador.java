@@ -29,9 +29,9 @@ public class Controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    Producto pro=new Producto();
-    ProductoDAO prodao=new ProductoDAO();
-    
+    Producto pro = new Producto();
+    ProductoDAO prodao = new ProductoDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -42,10 +42,18 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Inventario")) {
             switch (accion) {
                 case "Listar":
-                    List lista=prodao.listar();
+                    List lista = prodao.listar();
                     request.setAttribute("productos", lista);
                     break;
                 case "Agregar":
+                    String nombre = request.getParameter("txtNombre");
+                    String descripcion = request.getParameter("txtDescripcion");
+                    String estatus = request.getParameter("selEstatus");
+                    pro.setNombre(nombre);
+                    pro.setDescripcion(descripcion);
+                    pro.setEstatus(estatus);
+                    prodao.agregar(pro);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Actualizar":
                     break;
