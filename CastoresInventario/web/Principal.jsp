@@ -24,14 +24,8 @@
                         <li class="nav-item">
                             <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Inventario&accion=Listar" target="myFrame">Inventario</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ${usuario.getIdRol() == 1 ? '' : 'd-none'}">
                             <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Historial" target="myFrame">Historial</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=SalidaProducto" target="myFrame">Salida de productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=EntradaProducto" target="myFrame">Entrada de productos</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +48,7 @@
                 </div>
             </div>
         </nav>
-        <div class="m-4" style="height: 650px">
+        <div class="m-4" style="height: 800px">
             <iframe name="myFrame" style="height: 100%; width: 100%"></iframe>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

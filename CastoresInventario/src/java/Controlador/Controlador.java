@@ -31,6 +31,7 @@ public class Controlador extends HttpServlet {
      */
     Producto pro = new Producto();
     ProductoDAO prodao = new ProductoDAO();
+    int idPro;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,7 +56,23 @@ public class Controlador extends HttpServlet {
                     prodao.agregar(pro);
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
-                case "Actualizar":
+                case "Aumenta":
+                    idPro = Integer.parseInt(request.getParameter("id"));
+                    Producto p = prodao.listarId(idPro);
+                    request.setAttribute("producto", p);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
+                    break;
+                case "Aumentar":
+                    int idProductoAu = Integer.parseInt(request.getParameter("txtIdProductoAu"));
+                    String nombreAu = request.getParameter("txtNombreAu");
+                    int inventarioAu = Integer.parseInt(request.getParameter("txtInventarioAu")) + Integer.parseInt(request.getParameter("txtAumentar"));
+                    pro.setIdProducto(idProductoAu);
+                    pro.setNombre(nombreAu);
+                    pro.setInventario(inventarioAu);
+                    prodao.actualizarInventario(pro);
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
+                    break;
+                case "Sacar":
                     break;
                 case "Bajar":
                     break;
@@ -69,28 +86,6 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Historial")) {
             request.getRequestDispatcher("Historial.jsp").forward(request, response);
         }
-        /*switch (accion) {
-            case "Principal":
-                request.getRequestDispatcher("Principal.jsp").forward(request, response);
-                break;
-            case "Inventario":
-                request.getRequestDispatcher("Inventario.jsp").forward(request, response);
-                break;
-            case "Historial":
-                request.getRequestDispatcher("Historial.jsp").forward(request, response);
-                break;
-            case "EntradaProducto":
-                request.getRequestDispatcher("EntradaProducto.jsp").forward(request, response);
-                break;
-            case "SalidaProducto":
-                request.getRequestDispatcher("SalidaProducto.jsp").forward(request, response);
-                break;
-            case "Agregar":
-                request.getRequestDispatcher("SalidaProducto.jsp").forward(request, response);
-                break;
-            default:
-                throw new AssertionError();
-        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

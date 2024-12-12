@@ -11,8 +11,9 @@ CREATE TABLE historico (
 CREATE TABLE productos (
   idProducto int(6) NOT NULL UNIQUE AUTO_INCREMENT,
   nombre varchar(40) NOT NULL,
-  estatus varchar(6) NOT NULL,
+  descripcion varchar(100) NOT NULL,
   inventario int(6) NOT NULL DEFAULT 0,
+  estatus varchar(6) NOT NULL,
   PRIMARY KEY(idProducto)
 );
 

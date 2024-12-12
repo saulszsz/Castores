@@ -37,14 +37,19 @@
                                 <td>${pro.getInventario()}</td>
                                 <td>${pro.getEstatus()}</td>
                                 <td>
-                                    <a>Aumentar</a>
-                                    <a>Sacar</a>
+                                    <a class="btn btn-info" href="Controlador?menu=Inventario&accion=Aumenta&id=${pro.getIdProducto()}">
+                                        <img style="width: 30px" src="img/box_add.png" alt=""/>
+                                    </a>
+                                    <a class="btn btn-info" href="Controlador?menu=Inventario&accion=Saca&id=${pro.getIdProducto()}">
+                                        <img style="width: 30px" src="img/package.png" alt=""/>
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
+
             <div class="card col-sm-4">
                 <h4>Agregar producto</h4>
                 <div class="card-body">
@@ -57,12 +62,47 @@
                             <label>Descripcion</label>
                             <input type="text" name="txtDescripcion" class="form-control">
                         </div>
-                        <select class="form-select" name="selEstatus" aria-label="Default select example">
-                            <option selected>Estatus</option>
-                            <option value="ACTIVO">Activo</option>
-                            <option value="BAJA">Baja</option>
-                        </select>
+                        <div class="input-group">
+                            <label class="input-group-text" for="inputGroupSelect01">Estatus</label>
+                            <select class="form-select" name="selEstatus" aria-label="Default select example">
+                                <option value="ACTIVO">Activo</option>
+                                <option value="BAJA">Baja</option>
+                            </select>
+                        </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
+                    </form>
+                </div>
+            </div>
+
+            <div class="card col-sm-4 d-none">
+                <h4>Aumentar inventario</h4>
+                <div class="card-body">
+                    <form action="Controlador?menu=Inventario" method="POST">
+                        <div class="form-group input-group">
+                            <label style="width: 100px" class="input-group-text">IdProducto</label>
+                            <input type="text" value="${producto.getIdProducto()}" name="txtIdProductoAu" class="form-control" >
+                        </div>
+                        <div class="form-group input-group">
+                            <label style="width: 100px" class="input-group-text">Nombre</label>
+                            <input type="text" value="${producto.getNombre()}" name="txtNombreAu" class="form-control">
+                        </div>
+                        <div class="form-group input-group">
+                            <label style="width: 100px" class="input-group-text">Descripcion</label>
+                            <input type="text" value="${producto.getDescripcion()}" name="txtDescripcionAu" class="form-control">
+                        </div>
+                        <div class="form-group input-group">
+                            <label style="width: 100px" class="input-group-text">Inventario</label>
+                            <input type="text" value="${producto.getInventario()}" name="txtInventarioAu" class="form-control">
+                        </div>
+                        <div class="form-group input-group">
+                            <label style="width: 100px" class="input-group-text">Estatus</label>
+                            <input type="text" value="${producto.getEstatus()}" name="txtEstatusAu" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Cantidad a aumentar</label>
+                            <input type="number" name="txtAumentar" class="form-control">
+                        </div>
+                        <input type="submit" name="accion" value="Aumentar" class="btn btn-success">
                     </form>
                 </div>
             </div>

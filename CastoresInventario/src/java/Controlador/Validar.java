@@ -44,6 +44,9 @@ public class Validar extends HttpServlet {
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+        } else if (accion.equalsIgnoreCase("Salir")) {
+            request.setAttribute("usuario", new Usuario());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -86,6 +89,9 @@ public class Validar extends HttpServlet {
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+        } else if (accion.equalsIgnoreCase("Salir")) {
+            request.setAttribute("usuario", new Usuario());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }

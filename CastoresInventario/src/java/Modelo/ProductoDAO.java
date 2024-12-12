@@ -58,8 +58,8 @@ public class ProductoDAO {
         return r;
     }
 
-    public int listarId(int id) {
-        String sql = "select * from producto where idProducto="+id;
+    public Producto listarId(int id) {
+        String sql = "select * from productos where idProducto="+id;
         Producto p = new Producto();
         try {
             con = cn.Conexion();
@@ -74,10 +74,10 @@ public class ProductoDAO {
             }
         } catch (Exception e) {
         }
-        return r;
+        return p;
     }
 
-    public int actualizar(Producto pro) {
+    public int actualizarInventario(Producto pro) {
         String sql = "update productos set inventario=? where idProducto=?";
         try {
             con = cn.Conexion();
