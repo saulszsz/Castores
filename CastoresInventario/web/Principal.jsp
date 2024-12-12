@@ -22,13 +22,16 @@
                             <a class="navbar-brand" href="#">Castores</a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?accion=Inventario" target="myFrame">Inventario</a>
+                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Inventario&accion=Listar" target="myFrame">Inventario</a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?accion=SalidaProducto" target="myFrame">Salida de productos</a>
+                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Historial" target="myFrame">Historial</a>
                         </li>
                         <li class="nav-item">
-                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?accion=Historial" target="myFrame">Historial</a>
+                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=SalidaProducto" target="myFrame">Salida de productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=EntradaProducto" target="myFrame">Entrada de productos</a>
                         </li>
                     </ul>
                 </div>
