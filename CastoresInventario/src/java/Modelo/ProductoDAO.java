@@ -23,8 +23,55 @@ public class ProductoDAO {
     ResultSet rs;
     int r;
 
-    public List listar() {
+    public List listar(int rol) {
+        String sql;
+        if (rol == 1) {
+            sql = "select * from productos";
+        } else {
+            sql = "select * from productos where estatus = 'ACTIVO'";
+        }
+        List<Producto> lista = new ArrayList<>();
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setNombre(rs.getString("nombre"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setInventario(rs.getInt("inventario"));
+                p.setEstatus(rs.getString("estatus"));
+                lista.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+
+    public List listarAdm() {
         String sql = "select * from productos";
+        List<Producto> lista = new ArrayList<>();
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setNombre(rs.getString("nombre"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setInventario(rs.getInt("inventario"));
+                p.setEstatus(rs.getString("estatus"));
+                lista.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+
+    public List listarAlm() {
+        String sql = "select * from productos where estatus = 'ACTIVO'";
         List<Producto> lista = new ArrayList<>();
         try {
             con = cn.Conexion();
@@ -59,7 +106,7 @@ public class ProductoDAO {
     }
 
     public Producto listarId(int id) {
-        String sql = "select * from productos where idProducto="+id;
+        String sql = "select * from productos where idProducto=" + id;
         Producto p = new Producto();
         try {
             con = cn.Conexion();

@@ -30,6 +30,7 @@ public class Validar extends HttpServlet {
      */
     UsuarioDAO udao = new UsuarioDAO();
     Usuario usr = new Usuario();
+    String idRolS;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,9 +45,6 @@ public class Validar extends HttpServlet {
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-        } else if (accion.equalsIgnoreCase("Salir")) {
-            request.setAttribute("usuario", new Usuario());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -78,23 +76,7 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter("accion");
-        if (accion.equalsIgnoreCase("Ingresar")) {
-            String user = request.getParameter("txtuser");
-            String pass = request.getParameter("txtpass");
-            usr = udao.validar(user, pass);
-            if (usr.getCorreo() != null) {
-                request.setAttribute("usuario", usr);
-                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
-            } else {
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-        } else if (accion.equalsIgnoreCase("Salir")) {
-            request.setAttribute("usuario", new Usuario());
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

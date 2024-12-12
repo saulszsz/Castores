@@ -6,6 +6,8 @@ package Controlador;
 
 import Modelo.Producto;
 import Modelo.ProductoDAO;
+import Modelo.Usuario;
+import Modelo.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -29,24 +31,43 @@ public class Controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    UsuarioDAO udao = new UsuarioDAO();
+    Usuario usr = new Usuario();
     Producto pro = new Producto();
     ProductoDAO prodao = new ProductoDAO();
     int idPro;
+    List lista;
+    int VisAgregar;
+    int VisAumentar;
+    int VisSacar;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
+        //idRol = usr.getIdRol();
         if (menu.equals("Principal")) {
+            usr = (Usuario) request.getAttribute("usuario");
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
         }
         if (menu.equals("Inventario")) {
             switch (accion) {
                 case "Listar":
-                    List lista = prodao.listar();
+                    lista = prodao.listar(usr.getIdRol());
                     request.setAttribute("productos", lista);
+                    request.setAttribute("VisAgregar", VisAgregar);
+                    request.setAttribute("VisAumentar", VisAumentar);
+                    request.setAttribute("VisSacar", VisSacar);
+                    request.setAttribute("usr", usr);
+                    break;
+                case "VistaAgregar":
+                    VisAgregar = 1;
+                    VisAumentar = 0;
+                    VisSacar = 0;
+                    request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Agregar":
+                    VisAgregar = 0;
                     String nombre = request.getParameter("txtNombre");
                     String descripcion = request.getParameter("txtDescripcion");
                     String estatus = request.getParameter("selEstatus");
@@ -57,12 +78,16 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Aumenta":
+                    VisAgregar = 0;
+                    VisAumentar = 1;
+                    VisSacar = 0;
                     idPro = Integer.parseInt(request.getParameter("id"));
                     Producto p = prodao.listarId(idPro);
                     request.setAttribute("producto", p);
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
                     break;
                 case "Aumentar":
+                    VisAumentar = 0;
                     int idProductoAu = Integer.parseInt(request.getParameter("txtIdProductoAu"));
                     String nombreAu = request.getParameter("txtNombreAu");
                     int inventarioAu = Integer.parseInt(request.getParameter("txtInventarioAu")) + Integer.parseInt(request.getParameter("txtAumentar"));
@@ -85,6 +110,17 @@ public class Controlador extends HttpServlet {
         }
         if (menu.equals("Historial")) {
             request.getRequestDispatcher("Historial.jsp").forward(request, response);
+        }
+        if (menu.equals("SalidaProducto")) {
+            switch (accion) {
+                case "ListarAlm":
+                    lista = prodao.listarAlm();
+                    request.setAttribute("productos", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("SalidaProducto.jsp").forward(request, response);
         }
     }
 

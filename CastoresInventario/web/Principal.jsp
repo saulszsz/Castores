@@ -27,6 +27,9 @@
                         <li class="nav-item ${usuario.getIdRol() == 1 ? '' : 'd-none'}">
                             <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=Historial" target="myFrame">Historial</a>
                         </li>
+                        <li class="nav-item ${usuario.getIdRol() == 2 ? '' : 'd-none'}">
+                            <a style="margin-left:10px; border:none" class="btn btn-outline-light" href="Controlador?menu=SalidaProducto&accion=Listar" target="myFrame">Salida de producto</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">
@@ -35,8 +38,8 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end text-center">
                         <li><a class="dropdown-header" href="#"><img src="img/account_circle.png" alt="60" width="60" style="color: black"/></a></li>
+                        <li><h6 class="dropdown-header">${usuario.getIdRol() == 1 ? 'ADMINISTRADOR' : 'ALMACENISTA'}</h6></li>
                         <li><h6 class="dropdown-header">${usuario.getNombre()}</h6></li>
-                        <li><a class="dropdown-item" href="#">${usuario.getNombre()}</a></li>
                         <li><a class="dropdown-item" href="#">${usuario.getCorreo()}</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>

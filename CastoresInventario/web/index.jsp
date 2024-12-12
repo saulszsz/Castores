@@ -31,7 +31,7 @@
                             <label>Contraseña:</label>
                             <input type="password" name="txtpass" class="form-control">
                         </div>
-                        <input type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-b">
+                        <input type="submit" name="accion" value="Ingresar" class="btn btn-info btn-b">
                     </form>
                 </div>   
             </div>     
