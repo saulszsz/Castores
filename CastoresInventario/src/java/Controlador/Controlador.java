@@ -52,7 +52,6 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
-        //idRol = usr.getIdRol();
         if (menu.equals("Principal")) {
             usr = (Usuario) request.getAttribute("usuario");
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
@@ -146,6 +145,8 @@ public class Controlador extends HttpServlet {
                     VisAgregar = 0;
                     VisAumentar = 0;
                     VisSacar = 0;
+                    idPro = Integer.parseInt(request.getParameter("id"));
+                    pro.setIdProducto(idPro);
                     pro.setEstatus("BAJA");
                     prodao.bajar(pro);
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
@@ -154,6 +155,8 @@ public class Controlador extends HttpServlet {
                     VisAgregar = 0;
                     VisAumentar = 0;
                     VisSacar = 0;
+                    idPro = Integer.parseInt(request.getParameter("id"));
+                    pro.setIdProducto(idPro);
                     pro.setEstatus("ACTIVO");
                     prodao.activar(pro);
                     request.getRequestDispatcher("Controlador?menu=Inventario&accion=Listar").forward(request, response);
